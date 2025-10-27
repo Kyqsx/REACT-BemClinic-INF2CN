@@ -1,0 +1,124 @@
+// src/context/useAuth.jsx
+import { useState, useEffect, useContext, createContext } from 'react';
+import api from 'axios'; // ajuste o caminho conforme seu projeto
+
+const AuthContext = createContext();
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+}
+
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      checkSession();
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  const checkSession = async () => {
+    try {
+      // 1. Verifica sessão ativa
+      const response = await api.get('/api/v1/auth/me');
+      const sessionData = response.data;
+
+      if (sessionData.logado === true) {
+        // 🔥 IMPORTANTE: em seu backend, "nome" na verdade é o EMAIL!
+        const emailFromSession = sessionData.nome; // ex: "mateuscordeiro1311@gmail.com"
+        const userIdFromSession = sessionData.id;
+        const userType = sessionData.tipo || "PACIENTE";
+
+        // Validação mínima
+        if (!emailFromSession || typeof emailFromSession !== 'string') {
+          throw new Error("E-mail da sessão inválido");
+        }
+
+        let userData = {
+          id: userIdFromSession,
+          nome: "Carregando...",
+          email: emailFromSession,
+          tipo: userType,
+        };
+
+        // 2. Carrega dados reais do paciente PELO E-MAIL (não pelo ID)
+        if (userType === "PACIENTE") {
+          try {
+            const encodedEmail = encodeURIComponent(emailFromSession);
+            const perfilResponse = await api.get(`/api/v1/pacientes/perfil?email=${encodedEmail}`);
+            const perfil = perfilResponse.data;
+
+            userData.nome = perfil.nome || emailFromSession.split('@')[0];
+            userData.id = perfil.id_paciente || userIdFromSession; // atualiza ID se disponível
+          } catch (err) {
+            console.warn("⚠️ Não foi possível carregar perfil por e-mail. Usando fallback.", err);
+            userData.nome = emailFromSession.split('@')[0] || "Usuário";
+          }
+        } else {
+          // Para outros tipos (ex: FUNCIONARIO), usa o que vier
+          userData.nome = emailFromSession.split('@')[0] || "Usuário";
+        }
+
+        setUser(userData);
+      } else {
+        logout();
+      }
+    } catch (error) {
+      console.error("❌ Erro ao validar sessão:", error);
+      logout();
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const login = (loginEmail, token, userDataFromLogin = {}) => {
+    // Salva no localStorage
+    localStorage.setItem('token', token);
+    localStorage.setItem('userEmail', loginEmail);
+
+    // Configura API
+    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+    // Cria objeto user mínimo
+    const userToSet = {
+      id: userDataFromLogin.id || null,
+      nome: userDataFromLogin.nome || loginEmail.split('@')[0],
+      email: loginEmail,
+      tipo: userDataFromLogin.tipo || "PACIENTE",
+    };
+
+    setUser(userToSet);
+    setLoading(false);
+  };
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userEmail');
+    delete api.defaults.headers.common['Authorization'];
+    setUser(null);
+    setLoading(false);
+  };
+
+  const value = {
+    user,
+    userId: user?.id,
+    userEmail: user?.email,
+    isAuthenticated: !!user,
+    isPaciente: user?.tipo === 'PACIENTE',
+    isFuncionario: user?.tipo === 'FUNCIONARIO',
+    login,
+    logout,
+    loading,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}

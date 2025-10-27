@@ -1,0 +1,260 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 1rem;
+  background: #ffffff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+}
+
+.login-card {
+  background: #f7f7f7;
+  backdrop-filter: blur(20px);
+  border-radius: 0.5rem;
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.login-card h2 {
+  color: var(--text);
+  font-size: 1.8rem;
+  margin: 0 0 0.5rem;
+  font-weight: 500;
+}
+
+.login-card p {
+  color: #313131;
+  font-size: 1rem;
+  margin: 0 0 2rem;
+}
+
+.loginInputGroup {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1.5rem;
+}
+
+.loginInputField {
+  width: 100%;
+  padding: 1rem;
+  padding-left: 1.2rem;
+  background: #e7e7e7;
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.loginInputField:focus,
+.loginInputField:valid {
+  border: 1px solid #2eb557;
+}
+
+.loginInputLabel {
+  position: absolute ;
+  top: 25%;
+  left: -1.5rem;
+  color: #000000;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+.loginInputField:focus ~ .loginInputLabel,
+.loginInputField:valid ~ .loginInputLabel {
+  font-size: 0.8rem;
+  color: #2eb557;
+  font-weight: 500;
+}
+
+.loginEye-button {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #000000;
+  transition: all 0.3s ease;
+}
+
+.loginEye-button:hover,
+.loginEye-button:focus {
+  color: #2eb557;
+  transform: translateY(-50%) scale(1.2);
+}
+
+.login-button {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #2eb557, #1c6d34);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(230, 131, 105, 0.3);
+}
+
+.login-button:hover {
+  background: linear-gradient(135deg, #1c6d34, #0c3017);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 16px rgba(46, 181, 68, 0.4);
+}
+
+.login-button:active {
+  transform: translateY(0);
+}
+
+.loginPopup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loginPopup-content {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 5px;
+  width: 90%;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: loginPopupFadeIn 0.3s ease-out;
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginPopup-content p {
+  color: #313131;
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+}
+
+.loginPopup-content button {
+  padding: 0.6rem 1.2rem;
+  background: #2eb557;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.loginPopup-content button:hover {
+  background: #1c6d34;
+}
+
+@keyframes loginPopupFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+.login-footer {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.link-button {
+  background: #f7f7f7;
+  border: none;
+  color: #2eb557;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color 0.3s ease;
+}
+.link-a{
+  color: #2eb557;
+  text-decoration: none;
+}
+.link-a:hover{
+  color: #1c6d34;
+  text-decoration: none;
+}
+.link-p{
+  color: #313131;
+  text-decoration: none;
+}
+
+.link-p:hover{
+  color: #2eb557;
+  text-decoration: none;
+}
+
+.link-button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #2eb557;
+  transition: width 0.4s ease;
+}
+
+.link-button:hover {
+  color: #1c6d34;
+}
+
+.link-button:hover::after {
+  width: 100%;
+}
+
+.link-button.small {
+  font-size: 0.9rem;
+  color: #313131;
+}
+
+.link-button.small:hover {
+  color: #2eb557;
+}
