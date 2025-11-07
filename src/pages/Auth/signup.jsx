@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/useAuth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import api from 'axios';
 import './signup.css';
 
@@ -137,8 +137,12 @@ const Signup = () => {
                 <div className='register-card'>
                     <h2>Registro</h2>
                     <p>Crie sua conta! 🚀</p>
+                    
                     <form className="register-form" onSubmit={handleSubmit}>
-                        <div className='registerInputGroup'>
+                        <div className='registerInputGroup horizontal'>
+                            <label className="registerInputLabel" title="Nome">
+                                <FontAwesomeIcon icon={faUser} />
+                            </label>
                             <input
                                 type="text"
                                 placeholder="Seu nome"
@@ -148,7 +152,10 @@ const Signup = () => {
                                 className='registerInputField'
                             />
                         </div>
-                        <div className='registerInputGroup'>
+                        <div className='registerInputGroup horizontal'>
+                            <label className="registerInputLabel" title="Email">
+                                <FontAwesomeIcon icon={faEnvelope} />
+                            </label>
                             <input
                                 type="email"
                                 placeholder="Seu email"
@@ -159,39 +166,49 @@ const Signup = () => {
                             />
                         </div>
 
-                        <div className="registerInputGroup">
-                            <input
-                                type={showPassword ? 'text' : 'password'}
-                                placeholder="Senha"
-                                value={senha}
-                                onChange={handlePasswordChange}
-                                required
-                                className='registerInputField'
-                            />
-                            <button
-                                type="button"
-                                className="registerEye-button"
-                                onClick={() => setShowPassword(!showPassword)}
-                            >
-                                {showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
-                            </button>
+                        <div className="registerInputGroup horizontal">
+                            <label className="registerInputLabel" title="Senha">
+                                <FontAwesomeIcon icon={faLock} />
+                            </label>
+                            <div className="registerPasswordWrapper">
+                                <input
+                                    type={showPassword ? 'text' : 'password'}
+                                    placeholder="Senha"
+                                    value={senha}
+                                    onChange={handlePasswordChange}
+                                    required
+                                    className='registerInputField'
+                                />
+                                <button
+                                    type="button"
+                                    className="registerEye-button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+                                </button>
+                            </div>
                         </div>
-                        <div className="registerInputGroup">
-                            <input
-                                type={showConfirmPassword ? 'text' : 'password'}
-                                placeholder="Repita sua senha"
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                                required
-                                className='registerInputField'
-                            />
-                            <button
-                                type="button"
-                                className="registerEye-button"
-                                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                            >
-                                {showConfirmPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
-                            </button>
+                        <div className="registerInputGroup horizontal">
+                            <label className="registerInputLabel" title="Confirmar Senha">
+                                <FontAwesomeIcon icon={faLock} />
+                            </label>
+                            <div className="registerPasswordWrapper">
+                                <input
+                                    type={showConfirmPassword ? 'text' : 'password'}
+                                    placeholder="Repita sua senha"
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                    required
+                                    className='registerInputField'
+                                />
+                                <button
+                                    type="button"
+                                    className="registerEye-button"
+                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                >
+                                    {showConfirmPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+                                </button>
+                            </div>
                         </div>
                         <div className="power-container">
                             <div

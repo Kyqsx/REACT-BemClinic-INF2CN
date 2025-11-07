@@ -3,7 +3,7 @@ import api from "axios";
 import Modal from "react-modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
-import './artigos.css'
+import '../../styles/artigos.css';
 
 const CategoriaArtigos = () => {
     const [categorias, setCategorias] = useState([]);
@@ -30,9 +30,9 @@ const CategoriaArtigos = () => {
 
         try {
             if (isEditing) {
-                await api.put(`http://localhost:8080/api/v1/categoria-artigos/${id}`, categoria);
+                await api.put(`/api/v1/categoria-artigos/${id}`, categoria);
             } else {
-                await api.post("http://localhost:8080/api/v1/categoria-artigos/create", categoria);
+                await api.post("/api/v1/categoria-artigos/create", categoria);
             }
 
             fetchCategorias(); // Atualiza a lista de categorias
@@ -57,7 +57,7 @@ const CategoriaArtigos = () => {
 
     const fetchCategorias = async () => {
         try {
-            const response = await api.get("http://localhost:8080/api/v1/categoria-artigos");
+            const response = await api.get("/api/v1/categoria-artigos");
             setCategorias(response.data);
         } catch (error) {
             console.error("Erro ao buscar categorias:", error);
@@ -89,7 +89,7 @@ const CategoriaArtigos = () => {
 
     const confirmDelete = async () => {
         try {
-            await api.delete(`http://localhost:8080/api/v1/categoria-artigos/${selectedCategoriaId}`);
+            await api.delete(`/api/v1/categoria-artigos/${selectedCategoriaId}`);
             setAlertMessage('Categoria excluída com sucesso!');
             fetchCategorias();
         } catch (error) {
@@ -110,7 +110,7 @@ const CategoriaArtigos = () => {
 
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="modal-content" overlayClassName="modal-overlay">
                 <h2 className="centerText">{isEditing ? 'Editar Categoria' : 'Criar Categoria'}</h2>
-                <form onSubmit={handleSubmit} className="reminder-form">
+                <form onSubmit={handleSubmit} className="">
                     <div className="artigoInputGroup">
                         <label className="artigoInputLabel">Nome da Categoria</label>
                         <input
@@ -155,7 +155,7 @@ const CategoriaArtigos = () => {
                 <div className="form3">
                     <button onClick={openModal} className="artigoCatButton btnSuccess">Criar Categoria</button>
                     <h2 className="artigoTitulo">Lista de Categoria de Artigos</h2>
-                    <div className="reminder-grid">
+                    <div className="">
                         <table>
                             <thead>
                                 <tr>

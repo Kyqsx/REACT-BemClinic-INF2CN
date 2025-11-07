@@ -1,7 +1,7 @@
 // src/pages/Profile.js
 import React, { useState } from 'react';
 import { useAuth } from '../../utils/useAuth'; // Importando useAuth
-import './profile.css'; // Importando estilos específicos (opcional)
+import '../../styles/perfil.css';
 
 function Profile() {
     const { user } = useAuth(); // Obtendo o usuário autenticado

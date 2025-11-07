@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/useAuth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faIdCard, faAddressCard, faTint, faCalendar, faPhone, faVenusMars, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import api from 'axios';
-import './completeProfile.css';
+import '../../styles/perfil.css';
 
 const CompletarPerfil = () => {
   const { isAuthenticated, userId } = useAuth();
@@ -146,20 +148,26 @@ const CompletarPerfil = () => {
           <h2>Completar Perfil</h2>
           <p>Por favor, preencha suas informações pessoais. 📝</p>
           <form className="signup-form" onSubmit={handleSubmit}>
-            <div className="completeInputGroup">
-              <label className="completeInputLabel">Nome Completo:</label>
+            <div className="completeInputGroup horizontal">
+              <label className="completeInputLabel" title="Nome Completo">
+                <FontAwesomeIcon icon={faUser} />
+              </label>
               <input
                 type='text'
+                placeholder="Nome completo"
                 className="completeInputField"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
                 required
               />
             </div>
-            <div className="completeInputGroup">
-              <label className="completeInputLabel">CPF:</label>
+            <div className="completeInputGroup horizontal">
+              <label className="completeInputLabel" title="CPF">
+                <FontAwesomeIcon icon={faIdCard} />
+              </label>
               <input
                 type="text"
+                placeholder="000.000.000-00"
                 className="completeInputField"
                 value={cpf}
                 onChange={handleCpfChange}
@@ -167,25 +175,30 @@ const CompletarPerfil = () => {
                 required
               />
             </div>
-            <div className="completeInputGroup">
-              <label className="completeInputLabel">RG:</label>
+            <div className="completeInputGroup horizontal">
+              <label className="completeInputLabel" title="RG">
+                <FontAwesomeIcon icon={faAddressCard} />
+              </label>
               <input
                 type="text"
+                placeholder="00.000.000-0"
                 className="completeInputField"
                 value={rg}
                 onChange={handleRgChange}
                 required
               />
             </div>
-            <div className="completeInputGroup">
-              <label className="completeInputLabel">Tipo Sanguíneo:</label>
+            <div className="completeInputGroup horizontal">
+              <label className="completeInputLabel" title="Tipo Sanguíneo">
+                <FontAwesomeIcon icon={faTint} />
+              </label>
               <select
                 className="completeInputField"
                 value={tipoSanguineo}
                 onChange={(e) => setTipoSanguineo(e.target.value)}
                 required
               >
-                <option value="">Selecione</option>
+                <option value="">Selecione o tipo sanguíneo</option>
                 <option value="A+">A+</option>
                 <option value="A-">A-</option>
                 <option value="B+">B+</option>
@@ -196,8 +209,10 @@ const CompletarPerfil = () => {
                 <option value="O-">O-</option>
               </select>
             </div>
-            <div className="completeInputGroup">
-              <label className="completeInputLabel">Data de Nascimento:</label>
+            <div className="completeInputGroup horizontal">
+              <label className="completeInputLabel" title="Data de Nascimento">
+                <FontAwesomeIcon icon={faCalendar} />
+              </label>
               <input
                 type="date"
                 className="completeInputField"
@@ -206,44 +221,55 @@ const CompletarPerfil = () => {
                 required
               />
             </div>
-            <div className="completeInputGroup">
-              <label className="completeInputLabel">Telefone:</label>
+            <div className="completeInputGroup horizontal">
+              <label className="completeInputLabel" title="Telefone">
+                <FontAwesomeIcon icon={faPhone} />
+              </label>
               <input
                 type="text"
+                placeholder="(00) 00000-0000"
                 className="completeInputField"
                 value={telefone}
                 onChange={handleTelefoneChange}
                 required
               />
             </div>
-            <div className="completeInputGroup">
-              <label className="completeInputLabel">Sexo:</label>
+            <div className="completeInputGroup horizontal">
+              <label className="completeInputLabel" title="Sexo">
+                <FontAwesomeIcon icon={faVenusMars} />
+              </label>
               <select
                 className="completeInputField"
                 value={sexo}
                 onChange={(e) => setSexo(e.target.value)}
                 required
               >
-                <option value="">Selecione</option>
+                <option value="">Selecione o sexo</option>
                 <option value="Masculino">Masculino</option>
                 <option value="Feminino">Feminino</option>
                 <option value="PrefiroNaoDizer">Prefiro Não Dizer</option>
               </select>
             </div>
-            <div className="completeInputGroup">
-              <label className="completeInputLabel">Nome da Mãe:</label>
+            <div className="completeInputGroup horizontal">
+              <label className="completeInputLabel" title="Nome da Mãe">
+                <FontAwesomeIcon icon={faUserFriends} />
+              </label>
               <input
                 type="text"
+                placeholder="Nome da mãe"
                 className="completeInputField"
                 value={nomeMae}
                 onChange={(e) => setNomeMae(e.target.value)}
                 required
               />
             </div>
-            <div className="completeInputGroup">
-              <label className="completeInputLabel">Nome do Pai:</label>
+            <div className="completeInputGroup horizontal">
+              <label className="completeInputLabel" title="Nome do Pai">
+                <FontAwesomeIcon icon={faUserFriends} />
+              </label>
               <input
                 type="text"
+                placeholder="Nome do pai"
                 className="completeInputField"
                 value={nomePai}
                 onChange={(e) => setNomePai(e.target.value)}

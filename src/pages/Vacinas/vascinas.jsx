@@ -3,8 +3,8 @@ import { useAuth } from '../../utils/useAuth';
 import Modal from 'react-modal'
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faPencil, faTrash, faHome, faPaperclip, faSyringe } from '@fortawesome/free-solid-svg-icons';
-import './vacinas.css'
+import { faCalendar, faPencil, faTrash, faHome, faPaperclip, faSyringe, faNotesMedical, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import '../../styles/outras.css';
 
 const Vacinas = () => {
     const { userId } = useAuth();
@@ -38,10 +38,10 @@ const Vacinas = () => {
 
         try {
             if (isEditing) {
-                await api.put(`http://localhost:8080/api/v1/vacinas/${id}`, vacina)
+                await api.put(`/api/v1/vacinas/${id}`, vacina)
                 setMessage('Vacina atualizada com sucesso!');
             } else {
-                await api.post(`http://localhost:8080/api/v1/vacinas/create`, vacina)
+                await api.post(`/api/v1/vacinas/create`, vacina)
                 setMessage('Vacina criada com sucesso!')
             }
 
@@ -69,7 +69,7 @@ const Vacinas = () => {
 
     const fetchVacinas = async () => {
         try {
-            const response = await api.get("http://localhost:8080/api/v1/vacinas/listall");
+            const response = await api.get("/api/v1/vacinas/listall");
             setVacinas(response.data)
         } catch (error) {
             console.error("Erro ao buscar a vacina:", error)
@@ -100,7 +100,7 @@ const Vacinas = () => {
 
     const confirmDelete = async () => {
         try {
-            await api.delete(`http://localhost:8080/api/v1/vacinas/${selectedVacinaId}`);
+            await api.delete(`/api/v1/vacinas/${selectedVacinaId}`);
             setMessage('Vacina excluída com sucesso!'); // Mensagem de sucesso ao excluir
             fetchVacinas();
             setSelectedVacinaId(null);
@@ -125,19 +125,24 @@ const Vacinas = () => {
         <div className="reminder-page">
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="modal-content" overlayClassName="modal-overlay">
                 <h2 className="centerText">{isEditing ? 'Editar Vacina' : 'Criar Vacina'}</h2>
-                <form onSubmit={handleSubmit} className="reminder-form">
-                    <div className="vacinaInputGroup">
-                        <label className="vacinaInputLabel">Nome</label>
+                <form onSubmit={handleSubmit} className="">
+                    <div className="vacinaInputGroup horizontal">
+                        <label className="vacinaInputLabel" title="Nome da Vacina">
+                            <FontAwesomeIcon icon={faSyringe} />
+                        </label>
                         <input
                             type="text"
                             className="vacinaInputField"
                             required
+                            placeholder="Nome da vacina"
                             value={nome_vacina}
                             onChange={(e) => setNomeVacina(e.target.value)}
                         />
                     </div>
-                    <div className="vacinaInputGroup">
-                        <label className="vacinaInputLabel">Data</label>
+                    <div className="vacinaInputGroup horizontal">
+                        <label className="vacinaInputLabel" title="Data da Vacina">
+                            <FontAwesomeIcon icon={faCalendar} />
+                        </label>
                         <input
                             type="date"
                             className="vacinaInputField"
@@ -146,35 +151,43 @@ const Vacinas = () => {
                             onChange={(e) => setDataVacina(e.target.value)}
                         />
                     </div>
-                    <div className="vacinaInputGroup">
-                        <label className="vacinaInputLabel">Dose</label>
+                    <div className="vacinaInputGroup horizontal">
+                        <label className="vacinaInputLabel" title="Dose">
+                            <FontAwesomeIcon icon={faNotesMedical} />
+                        </label>
                         <select
                             className="vacinaInputField"
                             value={dose}
                             onChange={(e) => setDose(e.target.value)}
                             required
                         >
-                            <option value="">Selecione</option>
+                            <option value="">Selecione a dose</option>
                             <option value="dose1">1º Dose</option>
                             <option value="dose2">2º Dose</option>
                             <option value="doseReforco">Dose de Reforço</option>
                             <option value="doseAdicional">Dose Adicional</option>
                         </select>
                     </div>
-                    <div className="vacinaInputGroup">
-                        <label className="vacinaInputLabel">Local</label>
+                    <div className="vacinaInputGroup horizontal">
+                        <label className="vacinaInputLabel" title="Local">
+                            <FontAwesomeIcon icon={faMapMarkerAlt} />
+                        </label>
                         <input
                             type="text"
                             className="vacinaInputField"
                             required
+                            placeholder="Local da vacinação"
                             value={local_vacina}
                             onChange={(e) => setLocalVacina(e.target.value)}
                         />
                     </div>
-                    <div className="vacinaInputGroup">
-                        <label className="vacinaInputLabel">Observação</label>
+                    <div className="vacinaInputGroup horizontal">
+                        <label className="vacinaInputLabel" title="Observação">
+                            <FontAwesomeIcon icon={faPaperclip} />
+                        </label>
                         <input
                             type="text"
+                            placeholder="Observações"
                             value={observacao}
                             onChange={(e) => setObservacao(e.target.value)}
                             className="vacinaInputField"

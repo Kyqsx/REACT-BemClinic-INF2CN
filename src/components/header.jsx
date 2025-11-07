@@ -4,17 +4,24 @@ import { Link } from 'react-router-dom';
 import './components.css';
 import { useState } from 'react';
 import { useAuth } from '../utils/useAuth'; // Importando useAuth
+import Isotipo from '../assets/Isotipo.png'; // Importando isotipo
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightFromBracket, faUser, faShield, faNewspaper, faList } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
     const { user, logout } = useAuth(); // Obtendo o usuário e a função de logout
     const [isConsultasDropdownOpen, setConsultasDropdownOpen] = useState(false);
     const [isPacientesDropdownOpen, setPacientesDropdownOpen] = useState(false);
     const [isMedicosDropdownOpen, setMedicosDropdownOpen] = useState(false);
+    const [isUserDropdownOpen, setUserDropdownOpen] = useState(false);
+    const [isArtigosDropdownOpen, setArtigosDropdownOpen] = useState(false);
 
     const handleConsultasMouseEnter = () => {
         setConsultasDropdownOpen(true);
         setPacientesDropdownOpen(false);
         setMedicosDropdownOpen(false);
+        setUserDropdownOpen(false);
+        setArtigosDropdownOpen(false);
     };
 
     const handleConsultasMouseLeave = () => {
@@ -25,6 +32,8 @@ function Header() {
         setPacientesDropdownOpen(true);
         setConsultasDropdownOpen(false);
         setMedicosDropdownOpen(false);
+        setUserDropdownOpen(false);
+        setArtigosDropdownOpen(false);
     };
 
     const handlePacientesMouseLeave = () => {
@@ -35,10 +44,36 @@ function Header() {
         setMedicosDropdownOpen(true);
         setPacientesDropdownOpen(false);
         setConsultasDropdownOpen(false);
+        setUserDropdownOpen(false);
+        setArtigosDropdownOpen(false);
     };
 
     const handleMedicosMouseLeave = () => {
         setMedicosDropdownOpen(false);
+    };
+
+    const handleArtigosMouseEnter = () => {
+        setArtigosDropdownOpen(true);
+        setConsultasDropdownOpen(false);
+        setPacientesDropdownOpen(false);
+        setMedicosDropdownOpen(false);
+        setUserDropdownOpen(false);
+    };
+
+    const handleArtigosMouseLeave = () => {
+        setArtigosDropdownOpen(false);
+    };
+
+    const handleUserMouseEnter = () => {
+        setUserDropdownOpen(true);
+        setConsultasDropdownOpen(false);
+        setPacientesDropdownOpen(false);
+        setMedicosDropdownOpen(false);
+        setArtigosDropdownOpen(false);
+    };
+
+    const handleUserMouseLeave = () => {
+        setUserDropdownOpen(false);
     };
 
     const handleLogout = () => {
@@ -47,82 +82,130 @@ function Header() {
 
     return (
         <header>
-            <div>
-                <Link to="/" className="abas">Home</Link>
+            <div className="logo">
+                <Link to="/" className="">
+                    <img src={Isotipo} alt="BemClinic" className="logo-isotipo" />
+                </Link>
             </div>
             <nav>
-                {user && (user.tipo === 'ADMIN' || user.tipo === 'MEDICO') && (
-                    <Link to="/artigos" className='abas'>Artigos</Link>
-                )}
-                {user && (user.tipo === 'ADMIN' || user.tipo === 'MEDICO') && (
-                    <Link to="/categoriaartigos" className='abas'>Categoria Artigos</Link>
-                )}
-
-                {/*<div
-                    className="dropdown"
-                    onMouseEnter={handleConsultasMouseEnter}
-                    onMouseLeave={handleConsultasMouseLeave}
-                >
-                    <button className="abas">
-                        Consultas
-                    </button>
-                    {isConsultasDropdownOpen && (
-                        <div className="dropdown-content">
-                            <Link to='/marcarconsulta' className="sub-item">Marcar Consulta</Link>
-                            <Link to='/consultas' className="sub-item">Ver Consultas</Link>
-                        </div>
-                    )}
-                </div>*/}
-                <Link to="/lembretes" className='abas'>Lembretes</Link>
-                <Link to="/vacinas" className='abas'>Vacinas</Link>
-
-                {/* Renderiza o menu de Pacientes apenas se o usuário for ADMIN */}
+                {/* ==================== MENU PARA ADMIN ==================== */}
                 {user && user.tipo === 'ADMIN' && (
-                    <div
-                        className="dropdown"
-                        onMouseEnter={handlePacientesMouseEnter}
-                        onMouseLeave={handlePacientesMouseLeave}
-                    >
-                        <button className="abas">
-                            Pacientes
-                        </button>
-                        {isPacientesDropdownOpen && (
-                            <div className="dropdown-content">
-                                <Link to='/cadastrarpaciente' className="sub-item">Cadastrar Paciente</Link>
-                                <Link to='/paciente' className="sub-item">Listar Pacientes</Link>
-                                <Link to="/registropaciente" className='sub-item'>Cadastro Novo</Link>
-                            </div>
-                        )}
-                    </div>
-                )}
-
-                {/* Renderiza o menu de Médicos apenas se o usuário for ADMIN */}
-                {user && user.tipo === 'ADMIN' && (
-                    <div
-                        className="dropdown"
-                        onMouseEnter={handleMedicosMouseEnter}
-                        onMouseLeave={handleMedicosMouseLeave}
-                    >
-                        <button className="abas">
-                            Médicos
-                        </button>
-                        {isMedicosDropdownOpen && (
-                            <div className="dropdown-content">
-                                <Link to='/cadastrarmedico' className="sub-item">Cadastrar Médico</Link>
-                                <Link to='/medicos' className="sub-item">Listar Médicos</Link>
-                            </div>
-                        )}
-                    </div>
-                )}
-
-                {/* Links de Perfil e Logout */}
-                {user ? (
                     <>
-                        <button onClick={handleLogout} className='abas'>Sair</button>
+                        <Link to="/admin" className='abas dashboard-link'>
+                            <FontAwesomeIcon icon={faShield} /> Admin
+                        </Link>
+                        
+                        <div
+                            className="dropdown"
+                            onMouseEnter={handleArtigosMouseEnter}
+                            onMouseLeave={handleArtigosMouseLeave}
+                        >
+                            <button className="abas">Artigos ▼</button>
+                            {isArtigosDropdownOpen && (
+                                <div className="dropdown-content">
+                                    <Link to="/artigos" className="sub-item"><FontAwesomeIcon icon={faNewspaper} /> Ver Artigos</Link>
+                                    <Link to="/categoriaartigos" className="sub-item"><FontAwesomeIcon icon={faList} /> Categorias</Link>
+                                </div>
+                            )}
+                        </div>
+                        
+                        <Link to="/gerenciar-consultas" className='abas'>Consultas</Link>
                     </>
+                )}
+
+                {/* ==================== MENU PARA HOSPITAL ==================== */}
+                {user && user.tipo === 'HOSPITAL' && (
+                    <>
+                        <Link to="/hospital" className='abas dashboard-link'>
+                            🏥 Dashboard
+                        </Link>
+                        <Link to="/gerenciar-consultas" className='abas'>Consultas</Link>
+                        <Link to="/medicos" className='abas'>Médicos</Link>
+                        
+                        <div
+                            className="dropdown"
+                            onMouseEnter={handleArtigosMouseEnter}
+                            onMouseLeave={handleArtigosMouseLeave}
+                        >
+                            <button className="abas">Artigos ▼</button>
+                            {isArtigosDropdownOpen && (
+                                <div className="dropdown-content">
+                                    <Link to="/artigos" className="sub-item"><FontAwesomeIcon icon={faNewspaper} /> Ver Artigos</Link>
+                                    <Link to="/categoriaartigos" className="sub-item"><FontAwesomeIcon icon={faList} /> Categorias</Link>
+                                </div>
+                            )}
+                        </div>
+                    </>
+                )}
+
+                {/* ==================== MENU PARA MÉDICO ==================== */}
+                {user && user.tipo === 'MEDICO' && (
+                    <>
+                        <Link to="/consultas" className='abas'>Minhas Consultas</Link>
+                        <Link to="/paciente" className='abas'>Pacientes</Link>
+                        
+                        <div
+                            className="dropdown"
+                            onMouseEnter={handleArtigosMouseEnter}
+                            onMouseLeave={handleArtigosMouseLeave}
+                        >
+                            <button className="abas">Artigos ▼</button>
+                            {isArtigosDropdownOpen && (
+                                <div className="dropdown-content">
+                                    <Link to="/artigos" className="sub-item">📖 Ver Artigos</Link>
+                                    <Link to="/categoriaartigos" className="sub-item">🏷️ Categorias</Link>
+                                </div>
+                            )}
+                        </div>
+                        
+                        <Link to="/lembretes" className='abas'>Lembretes</Link>
+                    </>
+                )}
+
+                {/* ==================== MENU PARA PACIENTE ==================== */}
+                {user && user.tipo === 'PACIENTE' && (
+                    <>
+                        <Link to="/solicitar-consulta" className='abas'>Solicitar Consulta</Link>
+                        <Link to="/minhas-consultas" className='abas'>Minhas Consultas</Link>
+                        <Link to="/vacinas" className='abas'>Vacinas</Link>
+                        <Link to="/lembretes" className='abas'>Lembretes</Link>
+                    </>
+                )}
+
+                {/* ==================== MENU PARA NÃO LOGADOS ==================== */}
+                {!user && (
+                    <>
+                        <Link to="/" className='abas'>Início</Link>
+                        <Link to="/medicos" className='abas'>Médicos</Link>
+                        <Link to="/artigos" className='abas'>Artigos</Link>
+                    </>
+                )}
+
+                {/* ==================== PERFIL E LOGOUT ==================== */}
+                {user ? (
+                    <div
+                        className="dropdown user-dropdown"
+                        onMouseEnter={handleUserMouseEnter}
+                        onMouseLeave={handleUserMouseLeave}
+                    >
+                        <button className="abas perfil-link">
+                            <FontAwesomeIcon icon={faUser} /> {user.nome || 'Perfil'}
+                        </button>
+                        {isUserDropdownOpen && (
+                            <div className="dropdown-content user-dropdown-content">
+                                <Link to="/perfil" className="sub-item">
+                                    <FontAwesomeIcon icon={faUser} /> Ver Perfil
+                                </Link>
+                                <button onClick={handleLogout} className="sub-item logout-dropdown">
+                                    <FontAwesomeIcon icon={faRightFromBracket} /> Sair
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 ) : (
                     <>
-                        <Link to="/login" className='abas'>Entrar/Cadastrar</Link>
+                        <Link to="/login" className='abas login-btn'>Entrar</Link>
+                        <Link to="/signup" className='abas signup-btn'>Cadastrar</Link>
                     </>
                 )}
             </nav>

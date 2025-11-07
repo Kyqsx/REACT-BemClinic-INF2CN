@@ -1,12 +1,13 @@
 // No terminal, dentro do seu projeto React, execute:
 //npm install -g json server
 //npm install axios
-//npx json-server --watch db.json --port 3001
+//npx json-server --watch server.json --port 3001
 
 import api from "axios"
 import { useState, useEffect } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faPhone, faIdCard, faFileAlt, faTrash, faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faPhone, faIdCard, faFileAlt } from '@fortawesome/free-solid-svg-icons';
+import '../../styles/pacientes.css';
 import Header from '../../components/header';
 
 const CadastrarPaciente = () => {

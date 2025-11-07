@@ -8,6 +8,7 @@ import { useState, useEffect } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faPhone, faIdCard, faFileAlt, faTrash, faPencil } from '@fortawesome/free-solid-svg-icons';
 import Header from '../../components/header';
+import '../../styles/pacientes.css';
 
 const Pacientes = () => {
 

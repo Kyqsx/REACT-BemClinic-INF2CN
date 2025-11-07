@@ -1,0 +1,508 @@
+/* ============================================
+   SOLICITAR CONSULTA CSS - BemClinic
+   Design moderno para solicitação de consultas
+   ============================================ */
+
+.solicitar-consulta-page {
+  min-height: calc(100vh - 80px);
+  background-color: var(--gray-50);
+  padding: var(--space-8) var(--space-4);
+}
+
+.solicitar-consulta-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.solicitar-consulta-card {
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-8);
+  margin-bottom: var(--space-6);
+}
+
+.solicitar-consulta-card h2 {
+  font-family: var(--font-secondary);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 var(--space-2) 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.solicitar-consulta-card h2::before {
+  content: '📅';
+  font-size: var(--text-4xl);
+}
+
+.subtitle {
+  color: var(--gray-600);
+  font-size: var(--text-lg);
+  text-align: center;
+  margin: 0 0 var(--space-8) 0;
+}
+
+/* ============================================
+   FORMULÁRIO
+   ============================================ */
+
+.consulta-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--gray-700);
+  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.form-group label svg {
+  color: var(--primary-blue);
+  width: 16px;
+  height: 16px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: var(--space-3) var(--space-4);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-base);
+  font-family: var(--font-primary);
+  background-color: var(--white);
+  color: var(--gray-900);
+  transition: all var(--transition-fast);
+  min-height: 48px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  transform: translateY(-1px);
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+  border-color: var(--gray-300);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: var(--font-primary);
+}
+
+.form-hint {
+  font-size: var(--text-xs);
+  color: var(--gray-500);
+  margin-top: var(--space-1);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.form-hint::before {
+  content: 'ℹ️';
+  font-size: 12px;
+}
+
+/* ============================================
+   DETALHES DO HOSPITAL
+   ============================================ */
+
+.hospital-details-card {
+  background: linear-gradient(135deg, var(--secondary-blue-light), var(--white));
+  border: 2px solid var(--secondary-blue);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  margin: var(--space-4) 0;
+  box-shadow: var(--shadow-md);
+}
+
+.hospital-details-card h4 {
+  font-family: var(--font-secondary);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--gray-800);
+  margin: 0 0 var(--space-4) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.hospital-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-3);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--primary-blue);
+}
+
+.info-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--gray-800);
+  line-height: 1.4;
+}
+
+.emergency-badge {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, var(--error-red-light), var(--error-red));
+  color: var(--white);
+  text-align: center;
+  font-weight: 700;
+  border-left: none;
+  padding: var(--space-4);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.emergency-badge span {
+  font-size: var(--text-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+/* ============================================
+   AÇÕES DO FORMULÁRIO
+   ============================================ */
+
+.form-actions {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 2px solid var(--gray-100);
+}
+
+.btn-secondary,
+.btn-primary {
+  flex: 1;
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-xl);
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: 2px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 56px;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  background-color: var(--gray-100);
+  color: var(--gray-700);
+  border-color: var(--gray-200);
+}
+
+.btn-secondary:hover {
+  background-color: var(--gray-200);
+  border-color: var(--gray-300);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--primary-blue-dark), var(--primary-blue));
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:disabled {
+  background: var(--gray-400);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-primary:disabled::before {
+  display: none;
+}
+
+/* ============================================
+   POPUPS
+   ============================================ */
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-4);
+}
+
+.popup-content {
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-2xl);
+  animation: popupSlideIn 0.3s ease-out;
+}
+
+@keyframes popupSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.popup.success .popup-content {
+  border-top: 6px solid var(--success-green);
+}
+
+.popup.error .popup-content {
+  border-top: 6px solid var(--error-red);
+}
+
+.popup-content h3 {
+  font-family: var(--font-secondary);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin: 0 0 var(--space-4) 0;
+}
+
+.popup.success h3 {
+  color: var(--success-green);
+}
+
+.popup.error h3 {
+  color: var(--error-red);
+}
+
+.popup-content p {
+  color: var(--gray-600);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  margin: 0 0 var(--space-6) 0;
+}
+
+.popup-content button {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.popup-content button:hover {
+  background: linear-gradient(135deg, var(--primary-blue-dark), var(--primary-blue));
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .solicitar-consulta-page {
+    padding: var(--space-4) var(--space-2);
+  }
+
+  .solicitar-consulta-card {
+    padding: var(--space-6);
+  }
+
+  .solicitar-consulta-card h2 {
+    font-size: var(--text-2xl);
+    flex-direction: column;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .hospital-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .emergency-badge {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .solicitar-consulta-card h2::before {
+    font-size: var(--text-2xl);
+  }
+
+  .hospital-details-card {
+    padding: var(--space-4);
+  }
+
+  .popup-content {
+    padding: var(--space-6);
+    margin: var(--space-2);
+  }
+}
+
+/* ============================================
+   ESTADOS DE LOADING
+   ============================================ */
+
+.loading-form {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.form-group input:invalid {
+  border-color: var(--error-red);
+}
+
+.form-group input:valid {
+  border-color: var(--success-green);
+}
+
+/* ============================================
+   MELHORIAS VISUAIS
+   ============================================ */
+
+.form-group select option {
+  padding: var(--space-2);
+  font-size: var(--text-base);
+}
+
+.form-group select option:first-child {
+  color: var(--gray-500);
+  font-style: italic;
+}
+
+.form-group input[type="date"]::-webkit-calendar-picker-indicator,
+.form-group input[type="time"]::-webkit-calendar-picker-indicator {
+  color: var(--primary-blue);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  padding: var(--space-1);
+}
+
+.form-group input[type="date"]::-webkit-calendar-picker-indicator:hover,
+.form-group input[type="time"]::-webkit-calendar-picker-indicator:hover {
+  background-color: var(--primary-blue-light);
+}
+
+/* Animações sutis */
+.form-group {
+  animation: fadeInUp 0.3s ease-out forwards;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hospital-details-card {
+  animation: slideInDown 0.4s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

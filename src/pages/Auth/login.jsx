@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/useAuth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import api from 'axios';
+import api from '../../service/api';
 import './login.css';
 
 const Login = () => {
@@ -33,6 +33,10 @@ const Login = () => {
 
       const { token, tipo, id, nome } = response.data;
 
+      console.log('🔐 Resposta do login:', response.data);
+      console.log('📊 ID retornado:', id);
+      console.log('👤 Tipo:', tipo);
+
       if (!token || !tipo) {
         throw new Error('Resposta inválida do servidor');
       }
@@ -45,7 +49,9 @@ const Login = () => {
       } else if (tipo === 'PACIENTE') {
         navigate('/');
       } else if (tipo === 'ADMIN') {
-        navigate('/');
+        navigate('/admin');
+      } else if (tipo === 'HOSPITAL') {
+        navigate('/hospital');
       }
 
     } catch (error) {
@@ -68,18 +74,20 @@ const Login = () => {
   };
 
   return (
-    <div className="login">
-      <div className="login-container">
+    <div className="loginPage">
+      <div className="loginContainer">
         <div className="login-card">
           <h2>Bem-vindo de volta! 👋</h2>
           <p>Entre com sua conta para continuar</p>
 
           <form className="login-form" onSubmit={handleSubmit}>
-            <div className="loginInputGroup">
-              <label className="loginInputLabel"><FontAwesomeIcon icon={faEnvelope} /></label>
+            <div className="loginInputGroup horizontal">
+              <label className="loginInputLabel" title="Email">
+                <FontAwesomeIcon icon={faEnvelope} />
+              </label>
               <input
                 type="email"
-                placeholder=" "
+                placeholder="Digite seu email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -87,24 +95,27 @@ const Login = () => {
               />
             </div>
 
-            <div className="loginInputGroup">
-              <label className="loginInputLabel"><FontAwesomeIcon icon={faLock} /></label>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                placeholder=" "
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
-                required
-                className="loginInputField"
-              />
-              
-              <button
-                type="button"
-                className="loginEye-button"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
-              </button>
+            <div className="loginInputGroup horizontal">
+              <label className="loginInputLabel" title="Senha">
+                <FontAwesomeIcon icon={faLock} />
+              </label>
+              <div className="loginPasswordWrapper">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Digite sua senha"
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                  required
+                  className="loginInputField"
+                />
+                <button
+                  type="button"
+                  className="loginEye-button"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? <FontAwesomeIcon icon={faEye} /> : <FontAwesomeIcon icon={faEyeSlash} />}
+                </button>
+              </div>
             </div>
 
             <button type="submit" className="login-button">

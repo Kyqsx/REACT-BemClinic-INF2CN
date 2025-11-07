@@ -1,0 +1,639 @@
+/* ============================================
+   CONSULTAS CSS - BemClinic
+   Estilos para todas as páginas de consultas
+   ============================================ */
+
+.consultas-page {
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(135deg, var(--gray-50) 0%, var(--secondary-blue) 100%);
+  padding: var(--space-8) var(--space-4);
+}
+
+/* Header das páginas de consulta */
+.consultas-header {
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-8);
+  margin-bottom: var(--space-8);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.consultas-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-light));
+}
+
+.consultas-title {
+  font-family: var(--font-secondary);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--gray-900);
+  margin: 0 0 var(--space-2) 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.consultas-subtitle {
+  color: var(--gray-600);
+  font-size: var(--text-lg);
+  margin: 0;
+}
+
+/* Formulário de consulta */
+.consulta-form-container {
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.form-section {
+  margin-bottom: var(--space-8);
+}
+
+.form-section-title {
+  font-family: var(--font-secondary);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-3);
+  border-bottom: 2px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.form-grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+}
+
+.form-grid.two-columns {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Cards de consulta */
+.consultas-grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+}
+
+.consulta-card {
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-6);
+  transition: all var(--transition-fast);
+  border-left: 4px solid var(--gray-300);
+  position: relative;
+  overflow: hidden;
+}
+
+.consulta-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.consulta-card.pendente {
+  border-left-color: var(--warning-yellow);
+}
+
+.consulta-card.aceita {
+  border-left-color: var(--success-green);
+}
+
+.consulta-card.recusada {
+  border-left-color: var(--error-red);
+}
+
+.consulta-card.cancelada {
+  border-left-color: var(--gray-500);
+}
+
+/* Header do card */
+.consulta-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.consulta-info h3 {
+  font-family: var(--font-secondary);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0 0 var(--space-2) 0;
+}
+
+.consulta-id {
+  color: var(--gray-500);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* Status da consulta */
+.consulta-status {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.consulta-status.pendente {
+  background-color: #fffbeb;
+  color: var(--warning-yellow);
+}
+
+.consulta-status.aceita {
+  background-color: #ecfdf5;
+  color: var(--success-green);
+}
+
+.consulta-status.recusada {
+  background-color: #fef2f2;
+  color: var(--error-red);
+}
+
+.consulta-status.cancelada {
+  background-color: var(--gray-100);
+  color: var(--gray-600);
+}
+
+/* Corpo do card */
+.consulta-card-body {
+  margin-bottom: var(--space-6);
+}
+
+.consulta-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--gray-600);
+  font-size: var(--text-sm);
+}
+
+.detail-icon {
+  width: 16px;
+  color: var(--gray-400);
+  flex-shrink: 0;
+}
+
+.detail-label {
+  font-weight: 500;
+  min-width: 100px;
+}
+
+.detail-value {
+  flex: 1;
+}
+
+/* Footer do card */
+.consulta-card-footer {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: flex-end;
+  border-top: 1px solid var(--gray-200);
+  padding-top: var(--space-4);
+}
+
+/* Botões de ação */
+.btn-consulta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.btn-aceitar {
+  background-color: var(--success-green);
+  color: var(--white);
+}
+
+.btn-aceitar:hover {
+  background-color: #059669;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-recusar {
+  background-color: var(--error-red);
+  color: var(--white);
+}
+
+.btn-recusar:hover {
+  background-color: var(--error-red-light);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-visualizar {
+  background-color: var(--primary-blue);
+  color: var(--white);
+}
+
+.btn-visualizar:hover {
+  background-color: var(--primary-blue-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  color: var(--white);
+}
+
+.btn-editar {
+  background-color: var(--warning-yellow);
+  color: var(--white);
+}
+
+.btn-editar:hover {
+  background-color: #f59e0b;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-cancelar {
+  background-color: var(--gray-500);
+  color: var(--white);
+}
+
+.btn-cancelar:hover {
+  background-color: var(--gray-600);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Filtros de consulta */
+.consultas-filtros {
+  background-color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+  box-shadow: var(--shadow-md);
+}
+
+.filtros-grid {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: end;
+}
+
+.filtro-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.filtro-label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--gray-700);
+}
+
+.filtro-select {
+  padding: var(--space-3);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  background-color: var(--white);
+  transition: border-color var(--transition-fast);
+}
+
+.filtro-select:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
+}
+
+/* Calendário de consultas */
+.calendario-container {
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.calendario-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+}
+
+.calendario-titulo {
+  font-family: var(--font-secondary);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0;
+}
+
+.calendario-navegacao {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.btn-nav {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--gray-300);
+  background-color: var(--white);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-nav:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+/* Horários disponíveis */
+.horarios-container {
+  display: grid;
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  margin-top: var(--space-6);
+}
+
+.horario-slot {
+  padding: var(--space-3);
+  border: 2px solid var(--gray-300);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  background-color: var(--white);
+}
+
+.horario-slot:hover {
+  border-color: var(--primary-blue);
+  background-color: var(--secondary-blue);
+}
+
+.horario-slot.selected {
+  border-color: var(--primary-blue);
+  background-color: var(--primary-blue);
+  color: var(--white);
+}
+
+.horario-slot.occupied {
+  border-color: var(--error-red);
+  background-color: #fef2f2;
+  color: var(--error-red);
+  cursor: not-allowed;
+}
+
+.horario-slot.occupied:hover {
+  border-color: var(--error-red);
+  background-color: #fef2f2;
+}
+
+/* Estados especiais */
+.empty-consultas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-16);
+  text-align: center;
+  color: var(--gray-500);
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.empty-icon {
+  font-size: var(--text-5xl);
+  margin-bottom: var(--space-4);
+  opacity: 0.5;
+}
+
+.empty-title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: var(--space-2);
+}
+
+.empty-description {
+  font-size: var(--text-base);
+  color: var(--gray-500);
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+/* Loading */
+.loading-consultas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-16);
+  color: var(--gray-600);
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--gray-200);
+  border-top: 4px solid var(--primary-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--space-4);
+}
+
+/* Modal de confirmação */
+.modal-consulta {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-4);
+  animation: modalFadeIn 0.3s ease;
+}
+
+.modal-content {
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-2xl);
+  max-width: 500px;
+  width: 100%;
+  animation: modalSlideIn 0.3s ease;
+}
+
+.modal-header {
+  padding: var(--space-6);
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.modal-title {
+  font-family: var(--font-secondary);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--gray-900);
+  margin: 0;
+}
+
+.modal-body {
+  padding: var(--space-6);
+}
+
+.modal-footer {
+  padding: var(--space-6);
+  border-top: 1px solid var(--gray-200);
+  display: flex;
+  gap: var(--space-3);
+  justify-content: flex-end;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .consultas-page {
+    padding: var(--space-6) var(--space-4);
+  }
+  
+  .consultas-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+  
+  .form-grid.two-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .consultas-page {
+    padding: var(--space-4) var(--space-2);
+  }
+  
+  .consultas-header,
+  .consulta-form-container,
+  .calendario-container {
+    padding: var(--space-6);
+  }
+  
+  .consultas-title {
+    font-size: var(--text-3xl);
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  
+  .consultas-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .filtros-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .horarios-container {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  
+  .consulta-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+  
+  .consulta-card-footer {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+}
+
+@media (max-width: 480px) {
+  .consultas-title {
+    font-size: var(--text-2xl);
+  }
+  
+  .consulta-card {
+    padding: var(--space-4);
+  }
+  
+  .btn-consulta {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .calendario-header {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  
+  .horarios-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .consultas-page {
+    background: none;
+    padding: 0;
+  }
+  
+  .consultas-header,
+  .consulta-form-container,
+  .consulta-card {
+    box-shadow: none;
+    border: 1px solid var(--gray-300);
+  }
+  
+  .consulta-card-footer,
+  .consultas-filtros {
+    display: none;
+  }
+  
+  .consultas-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .consulta-card {
+    break-inside: avoid;
+    margin-bottom: var(--space-4);
+  }
+}

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/useAuth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkedAlt, faRoad, faHashtag, faBuilding, faMapSigns, faCity, faFlag } from '@fortawesome/free-solid-svg-icons';
 import api from 'axios';
-import './cadastrarEndereco.css';
+import '../../styles/outras.css';
 
 const EnderecoCadastro = () => {
   const { isAuthenticated, userId } = useAuth();
@@ -112,10 +114,13 @@ const buscarCep = async (valor) => {
           <h2>Endereço</h2>
           <p>Quase lá! Precisamos do seu endereço. 🏡</p>
           <form className="endereco-form" onSubmit={handleSubmit}>
-            <div className='enderecoInputGroup'>
-              <label className='enderecoInputLabel'>CEP:</label>
+            <div className='enderecoInputGroup horizontal'>
+              <label className='enderecoInputLabel' title="CEP">
+                <FontAwesomeIcon icon={faMapMarkedAlt} />
+              </label>
               <input
                 type="text"
+                placeholder="00000-000"
                 value={cep}
                 onChange={handleCepChange}
                 maxLength="9"
@@ -123,59 +128,77 @@ const buscarCep = async (valor) => {
                 className='enderecoInputField'
               />
             </div>
-            <div className='enderecoInputGroup'>
-              <label className='enderecoInputLabel'>Rua:</label>
+            <div className='enderecoInputGroup horizontal'>
+              <label className='enderecoInputLabel' title="Rua">
+                <FontAwesomeIcon icon={faRoad} />
+              </label>
               <input
                 type="text"
+                placeholder="Nome da rua"
                 value={rua}
                 onChange={(e) => setRua(e.target.value)}
                 required
                   className='enderecoInputField'
               />
             </div>
-            <div className='enderecoInputGroup'>
-              <label className='enderecoInputLabel'>Número:</label>
+            <div className='enderecoInputGroup horizontal'>
+              <label className='enderecoInputLabel' title="Número">
+                <FontAwesomeIcon icon={faHashtag} />
+              </label>
               <input
                 type="text"
+                placeholder="Número"
                 value={numero}
                 onChange={(e) => setNumero(e.target.value)}
                 required
                   className='enderecoInputField'
               />
             </div>
-            <div className='enderecoInputGroup'>
-              <label className='enderecoInputLabel'>Complemento:</label>
+            <div className='enderecoInputGroup horizontal'>
+              <label className='enderecoInputLabel' title="Complemento">
+                <FontAwesomeIcon icon={faBuilding} />
+              </label>
               <input
                 type="text"
+                placeholder="Complemento (opcional)"
                 value={complemento}
                 onChange={(e) => setComplemento(e.target.value)}
                   className='enderecoInputField'
               />
             </div>
-            <div className='enderecoInputGroup'>
-              <label className='enderecoInputLabel'>Bairro:</label>
+            <div className='enderecoInputGroup horizontal'>
+              <label className='enderecoInputLabel' title="Bairro">
+                <FontAwesomeIcon icon={faMapSigns} />
+              </label>
               <input
                 type="text"
+                placeholder="Bairro"
                 value={bairro}
                 onChange={(e) => setBairro(e.target.value)}
                 required
                   className='enderecoInputField'
               />
             </div>
-            <div className='enderecoInputGroup'>
-              <label className='enderecoInputLabel'>Cidade:</label>
+            <div className='enderecoInputGroup horizontal'>
+              <label className='enderecoInputLabel' title="Cidade">
+                <FontAwesomeIcon icon={faCity} />
+              </label>
               <input
                 type="text"
+                placeholder="Cidade"
                 value={cidade}
                 onChange={(e) => setCidade(e.target.value)}
                 required
                   className='enderecoInputField'
               />
             </div>
-            <div className='enderecoInputGroup'>
-              <label className='enderecoInputLabel'>Estado:</label>
+            <div className='enderecoInputGroup horizontal'>
+              <label className='enderecoInputLabel' title="Estado">
+                <FontAwesomeIcon icon={faFlag} />
+              </label>
               <input
                 type="text"
+                placeholder="UF"
                 value={estado}
                 onChange={(e) => setEstado(e.target.value.toUpperCase())}
                 maxLength="2"

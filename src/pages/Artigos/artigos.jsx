@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import api from "axios";
 import Modal from "react-modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCalendar, faPencil, faTrash, faHome } from '@fortawesome/free-solid-svg-icons';
-import './artigos.css';
+import { faUser, faCalendar, faPencil, faTrash, faHome, faHeading, faFileLines, faNewspaper, faImage, faCheck, faFolder } from '@fortawesome/free-solid-svg-icons';
+import '../../styles/artigos.css';
 
 Modal.setAppElement('#root');
 
@@ -43,10 +43,10 @@ const Artigos = () => {
 
         try {
             if (isEditing) {
-                await api.put(`http://localhost:8080/api/v1/artigos/${selectedArtigoId}`, artigo);
+                await api.put(`/api/v1/artigos/${selectedArtigoId}`, artigo);
                 setAlertMessage('Artigo atualizado com sucesso!'); // Mensagem de sucesso ao atualizar
             } else {
-                await api.post("http://localhost:8080/api/v1/artigos/create", artigo);
+                await api.post("/api/v1/artigos/create", artigo);
                 setAlertMessage('Artigo criado com sucesso!'); // Mensagem de sucesso ao criar
             }
             fetchArtigos(); // Atualiza a lista de artigos
@@ -73,7 +73,7 @@ const Artigos = () => {
 
     const fetchArtigos = async () => {
         try {
-            const response = await api.get("http://localhost:8080/api/v1/artigos");
+            const response = await api.get("/api/v1/artigos");
             setArtigos(response.data);
         } catch (error) {
             console.error("Erro ao buscar artigos:", error);
@@ -81,7 +81,7 @@ const Artigos = () => {
     };
 
     useEffect(() => {
-        api.get("http://localhost:8080/api/v1/categoria-artigos")
+        api.get("/api/v1/categoria-artigos")
             .then(res => setCategorias(res.data))
             .catch(() => console.error("Erro ao buscar categorias"));
     }, []);
@@ -114,7 +114,7 @@ const Artigos = () => {
 
     const confirmDelete = async () => {
         try {
-            await api.delete(`http://localhost:8080/api/v1/artigos/${selectedArtigoId}`);
+            await api.delete(`/api/v1/artigos/${selectedArtigoId}`);
             setAlertMessage('Artigo excluído com sucesso!');
             fetchArtigos();
         } catch (error) {
@@ -133,38 +133,49 @@ const Artigos = () => {
         <div className="reminder-page">
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="modal-content" overlayClassName="modal-overlay">
                 <h2 className="centerText">{isEditing ? 'Editar Artigo' : 'Criar Artigo'}</h2>
-                <form onSubmit={handleSubmit} className="reminder-form">
-                    <div className="artigoInputGroup">
-                        <label className="artigoInputLabel">Título</label>
+                <form onSubmit={handleSubmit} className="">
+                    <div className="artigoInputGroup horizontal">
+                        <label className="artigoInputLabel" title="Título">
+                            <FontAwesomeIcon icon={faHeading} />
+                        </label>
                         <input
                             type="text"
                             value={titulo}
                             required
+                            placeholder="Título do artigo"
                             onChange={(e) => setTitulo(e.target.value)}
                             className="artigoInputField"
                         />
                     </div>
-                    <div className="artigoInputGroup">
-                        <label className="artigoInputLabel">Descrição</label>
+                    <div className="artigoInputGroup horizontal">
+                        <label className="artigoInputLabel" title="Descrição">
+                            <FontAwesomeIcon icon={faFileLines} />
+                        </label>
                         <input
                             type="text"
                             value={descricao}
                             required
+                            placeholder="Descrição do artigo"
                             onChange={(e) => setDescricao(e.target.value)}
                             className="artigoInputField"
                         />
                     </div>
-                    <div className="artigoInputGroup">
-                        <label className="artigoInputLabel">Conteúdo</label>
+                    <div className="artigoInputGroup horizontal">
+                        <label className="artigoInputLabel" title="Conteúdo">
+                            <FontAwesomeIcon icon={faNewspaper} />
+                        </label>
                         <textarea
                             value={conteudo}
                             required
+                            placeholder="Conteúdo completo do artigo"
                             onChange={(e) => setConteudo(e.target.value)}
                             className="artigoInputField"
                         />
                     </div>
-                    <div className="artigoInputGroup">
-                        <label className="artigoInputLabel">Imagem</label>
+                    <div className="artigoInputGroup horizontal">
+                        <label className="artigoInputLabel" title="Imagem">
+                            <FontAwesomeIcon icon={faImage} />
+                        </label>
                         <input
                             type="file"
                             accept="image/*"
@@ -181,26 +192,29 @@ const Artigos = () => {
                             className="artigoInputField"
                         />
                     </div>
-                    <div className="artigoInputGroup">
-                        <label className="artigoInputLabel">Ativo</label>
-                        <label className="artigoToggle">
-                            <input
-                                type="checkbox"
-                                checked={ativo}
-                                onChange={(e) => setAtivo(e.target.checked)}
-                            />
-                            <span className="artigoSlider"></span>
-                        </label>
-                    </div>
-
-                    <div className="artigoInputGroup">
-                        <label className="artigoInputLabel">Categoria</label>
-                        <select value={id_categoria} required onChange={(e) => setCategoriaId(e.target.value)} className="artigoInputField">
-                            <option value="">Selecione a categoria</option>
-                            {categorias.filter(categoria => categoria.ativo).map((categoria) => (
-                                <option key={categoria.id} value={categoria.id}>{categoria.nome_categoria}</option>
-                            ))}
-                        </select>
+                        <div className="artigoInputGroup horizontal">
+                            <label className="artigoInputLabel" title="Ativo">
+                                <FontAwesomeIcon icon={faCheck} />
+                            </label>
+                            <label className="artigoToggle">
+                                <input
+                                    type="checkbox"
+                                    checked={ativo}
+                                    onChange={(e) => setAtivo(e.target.checked)}
+                                />
+                                <span className="artigoSlider"></span>
+                            </label>
+                        </div>
+                        <div className="artigoInputGroup horizontal">
+                            <label className="artigoInputLabel" title="Categoria">
+                                <FontAwesomeIcon icon={faFolder} />
+                            </label>
+                            <select value={id_categoria} required onChange={(e) => setCategoriaId(e.target.value)} className="artigoInputField">
+                                <option value="">Selecione a categoria</option>
+                                {categorias.filter(categoria => categoria.ativo).map((categoria) => (
+                                    <option key={categoria.id} value={categoria.id}>{categoria.nome_categoria}</option>
+                                ))}
+                            </select>
                     </div>
 
                     <div className="inputGroup row centerButton">
@@ -214,7 +228,7 @@ const Artigos = () => {
                 <div className="form3">
                     <button onClick={openModal} className="artigoButton btnSuccess">Criar Artigo</button>
                     <h2 className="artigoTitulo">Lista de Artigos</h2>
-                    <div className="reminder-grid">
+                    <div className="">
                         <table>
                             <thead>
                                 <tr>

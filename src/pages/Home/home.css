@@ -1,71 +1,542 @@
-.popupCompleteProfile {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  animation: fadeIn 0.3s ease-out;
+/* ============================================
+   HOME PAGE CSS - BemClinic
+   Design moderno para página inicial
+   ============================================ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-4);
+  min-height: calc(100vh - 80px);
 }
 
-.completeProfilePopup-content {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 340px;
+.form3 {
+  background-color: var(--white);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-8);
+  margin-bottom: var(--space-8);
+  animation: fadeIn 0.6s ease;
+}
+
+.centerText {
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  animation: scaleIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  line-height: 1.5;
+  font-family: var(--font-secondary);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: var(--space-8);
+  position: relative;
 }
 
-.completeProfilePopup-content p {
-  color: #313131;
-  margin: 0 0 1rem;
-  font-size: 1.05rem;
+.centerText::after {
+  content: '';
+  position: absolute;
+  bottom: -var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-light));
+  border-radius: var(--radius-full);
 }
 
-.completeProfilePopup-content button {
-  padding: 0.6rem 1.2rem;
-  background: #2eb557;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+/* Grid de Artigos */
+.reminder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+}
+
+/* Card de Artigo */
+.blog-post {
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  border: 1px solid var(--gray-200);
+  position: relative;
+  height: fit-content;
+}
+
+.blog-post:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-blue);
+}
+
+.blog-post::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--primary-blue-light));
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.blog-post:hover::before {
+  opacity: 1;
+}
+
+/* Imagem do Artigo */
+.post-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.blog-post:hover .post-image {
+  transform: scale(1.05);
+}
+
+/* Conteúdo do Card */
+.blog-post .artigoTexto {
+  padding: var(--space-6);
+  padding-bottom: var(--space-4);
+}
+
+.blog-post h2.artigoTexto {
+  font-family: var(--font-secondary);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: var(--space-3);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-post p.artigoTexto {
+  color: var(--gray-600);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  margin-bottom: var(--space-4);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.artigoDate {
+  color: var(--gray-500);
+  font-size: var(--text-sm);
   font-weight: 500;
-  transition: background 0.3s ease;
+  margin-bottom: var(--space-4);
+  padding: 0 var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
-.completeProfilePopup-content button:hover {
-  background: #1c6d34;
+.artigoDate::before {
+  content: '📅';
+  font-size: var(--text-base);
 }
 
+/* Botão Ler Mais */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: var(--text-base);
+  font-weight: 500;
+  font-family: var(--font-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+  white-space: nowrap;
+  margin: 0 var(--space-6) var(--space-6);
+}
+
+.btnInfo {
+  background-color: var(--primary-blue);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.btnInfo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btnInfo:hover {
+  background-color: var(--primary-blue-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btnInfo:hover::before {
+  left: 100%;
+}
+
+.btnInfo:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.3);
+}
+
+.btnError {
+  background-color: var(--error-red);
+  color: var(--white);
+}
+
+.btnError:hover {
+  background-color: var(--error-red-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Modal do Artigo */
 .modalArtigoOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-4);
 }
 
 .modalArtigoContent {
-    display: flex;
-    flex-direction: column;
-    width: 600px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    gap: 1rem;
+  background-color: var(--white);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-2xl);
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: var(--space-8);
+  animation: modalSlideIn 0.3s ease;
+  position: relative;
 }
 
-.modalArtigoTitulo{
+.modalArtigoTitulo {
+  font-family: var(--font-secondary);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: var(--space-6);
+  line-height: 1.3;
+  border-bottom: 2px solid var(--gray-200);
+  padding-bottom: var(--space-4);
+}
+
+.modalArtigoConteudo {
+  color: var(--gray-700);
+  font-size: var(--text-base);
+  line-height: 1.8;
+  margin-bottom: var(--space-8);
+  white-space: pre-wrap;
+}
+
+/* Popup de Completar Perfil */
+.popupCompleteProfile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  animation: modalFadeIn 0.3s ease;
+}
+
+.completeProfilePopup-content {
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  max-width: 500px;
+  width: 90%;
   text-align: center;
-  font-weight: bold;
+  box-shadow: var(--shadow-2xl);
+  animation: modalSlideIn 0.3s ease;
+  border-left: 4px solid var(--warning-yellow);
+  position: relative;
+}
+
+.completeProfilePopup-content::before {
+  content: '🚀';
+  font-size: var(--text-4xl);
+  display: block;
+  margin-bottom: var(--space-4);
+}
+
+.completeProfilePopup-content p {
+  color: var(--gray-700);
+  margin-bottom: var(--space-6);
+  font-size: var(--text-lg);
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.completeProfilePopup-content button {
+  background: linear-gradient(135deg, var(--warning-yellow) 0%, #fbbf24 100%);
+  color: var(--white);
+  border: none;
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-xl);
+  font-weight: 600;
+  font-size: var(--text-lg);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.completeProfilePopup-content button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.completeProfilePopup-content button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.completeProfilePopup-content button:hover::before {
+  left: 100%;
+}
+
+/* Estados Vazios */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-16);
+  text-align: center;
+  color: var(--gray-500);
+}
+
+.empty-state-icon {
+  font-size: var(--text-5xl);
+  margin-bottom: var(--space-4);
+  opacity: 0.5;
+}
+
+.empty-state-title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: var(--space-2);
+}
+
+.empty-state-description {
+  font-size: var(--text-base);
+  color: var(--gray-500);
+  max-width: 400px;
+}
+
+/* Loading State */
+.loading-articles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+}
+
+.article-skeleton {
+  background-color: var(--white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-300) 50%, var(--gray-200) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.skeleton-content {
+  padding: var(--space-6);
+}
+
+.skeleton-title {
+  height: 24px;
+  background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-300) 50%, var(--gray-200) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-3);
+}
+
+.skeleton-text {
+  height: 16px;
+  background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-300) 50%, var(--gray-200) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-2);
+}
+
+.skeleton-text:last-child {
+  width: 60%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--space-6) var(--space-4);
+  }
+  
+  .form3 {
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+  
+  .centerText {
+    font-size: var(--text-3xl);
+    margin-bottom: var(--space-6);
+  }
+  
+  .reminder-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  
+  .blog-post:hover {
+    transform: translateY(-4px);
+  }
+  
+  .modalArtigoContent {
+    padding: var(--space-6);
+    margin: var(--space-4);
+  }
+  
+  .modalArtigoTitulo {
+    font-size: var(--text-2xl);
+  }
+  
+  .completeProfilePopup-content {
+    margin: var(--space-4);
+    padding: var(--space-6);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: var(--space-4) var(--space-2);
+  }
+  
+  .centerText {
+    font-size: var(--text-2xl);
+  }
+  
+  .blog-post h2.artigoTexto {
+    font-size: var(--text-lg);
+  }
+  
+  .button {
+    width: calc(100% - var(--space-12));
+    margin: 0 var(--space-6) var(--space-6);
+  }
+  
+  .modalArtigoOverlay {
+    padding: var(--space-2);
+  }
+  
+  .modalArtigoContent {
+    padding: var(--space-4);
+    margin: 0;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .blog-post {
+    transition: none;
+  }
+  
+  .blog-post:hover {
+    transform: none;
+  }
+  
+  .post-image {
+    transition: none;
+  }
+  
+  .blog-post:hover .post-image {
+    transform: none;
+  }
+  
+  .button::before,
+  .completeProfilePopup-content button::before {
+    transition: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .button,
+  .completeProfilePopup-content,
+  .modalArtigoOverlay {
+    display: none;
+  }
+  
+  .blog-post {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid var(--gray-300);
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .blog-post {
+    border: 2px solid var(--gray-900);
+  }
+  
+  .button {
+    border: 2px solid currentColor;
+  }
 }

@@ -9,6 +9,7 @@
 import api from "axios";
 import cors from "cors";
 import { useState, useEffect } from "react";
+import '../../styles/outras.css';
 
 const Produto = () => {
 
@@ -17,7 +18,7 @@ const Produto = () => {
     const [vproduto, setProduto] = useState([]);
     //Ao carregar a tela ja traz os dados
     useEffect(() =>{
-        api.get("http://localhost:8080/api/v1/usuarios/getusers")
+        api.get("/api/v1/usuarios/getusers")
         .then(response =>{
             setProduto(response.data);
             console.log(response.data); 

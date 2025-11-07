@@ -20,7 +20,7 @@ const HomePage = () => {
 
     const fetchArtigos = async () => {
         try {
-            const response = await api.get("http://localhost:8080/api/v1/artigos");
+            const response = await api.get("/api/v1/artigos");
             setArtigos(response.data);
         } catch (error) {
             console.error("Erro ao buscar artigos:", error);
@@ -34,7 +34,7 @@ const HomePage = () => {
     const fetchPacienteData = async () => {
         if (userId) {
             try {
-                const response = await api.get(`http://localhost:8080/api/v1/pacientes/${userId}`);
+                const response = await api.get(`/api/v1/pacientes/${userId}`);
                 const paciente = response.data;
 
                 console.log('Dados do paciente:', paciente);

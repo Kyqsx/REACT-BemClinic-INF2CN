@@ -1,6 +1,7 @@
 import api from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import '../../styles/signup.css';
 
 const SignUp = () => {
     const [vpaciente, setPaciente] = useState([]);

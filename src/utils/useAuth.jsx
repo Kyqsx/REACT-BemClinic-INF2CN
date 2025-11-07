@@ -1,6 +1,6 @@
 // src/context/useAuth.jsx
 import { useState, useEffect, useContext, createContext } from 'react';
-import api from 'axios'; // ajuste o caminho conforme seu projeto
+import api from '../service/api';
 
 const AuthContext = createContext();
 
@@ -50,6 +50,8 @@ export function AuthProvider({ children }) {
           tipo: userType,
         };
 
+        console.log('📋 Dados da sessão:', { id: userIdFromSession, email: emailFromSession, tipo: userType });
+
         // 2. Carrega dados reais do paciente PELO E-MAIL (não pelo ID)
         if (userType === "PACIENTE") {
           try {
@@ -68,8 +70,10 @@ export function AuthProvider({ children }) {
           userData.nome = emailFromSession.split('@')[0] || "Usuário";
         }
 
+        console.log('✅ Usuário autenticado:', userData);
         setUser(userData);
       } else {
+        console.log('❌ Sessão não está logada');
         logout();
       }
     } catch (error) {
@@ -115,6 +119,9 @@ export function AuthProvider({ children }) {
     isAuthenticated: !!user,
     isPaciente: user?.tipo === 'PACIENTE',
     isFuncionario: user?.tipo === 'FUNCIONARIO',
+    isMedico: user?.tipo === 'MEDICO',
+    isHospital: user?.tipo === 'HOSPITAL',
+    isAdmin: user?.tipo === 'ADMIN',
     login,
     logout,
     loading,

@@ -3,8 +3,8 @@ import api from "axios";
 import { useAuth } from '../../utils/useAuth';
 import Modal from "react-modal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCalendar, faPencil, faTrash, faHome } from '@fortawesome/free-solid-svg-icons';
-import './lembretes.css';
+import { faUser, faCalendar, faPencil, faTrash, faHome, faHeading, faClock, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import '../../styles/outras.css';
 
 const Lembretes = () => {
     const { userId } = useAuth();
@@ -41,10 +41,10 @@ const Lembretes = () => {
 
         try {
             if (isEditing) {
-                await api.put(`http://localhost:8080/api/v1/lembretes/${id}`, lembrete);
+                await api.put(`/api/v1/lembretes/${id}`, lembrete);
                 setMessage('Lembrete atualizado com sucesso!'); // Mensagem de sucesso ao atualizar
             } else {
-                await api.post("http://localhost:8080/api/v1/lembretes/create", lembrete);
+                await api.post("/api/v1/lembretes/create", lembrete);
                 setMessage('Lembrete criado com sucesso!'); // Mensagem de sucesso ao criar
             }
 
@@ -72,7 +72,7 @@ const Lembretes = () => {
 
     const fetchLembretes = async () => {
         try {
-            const response = await api.get("http://localhost:8080/api/v1/lembretes");
+            const response = await api.get("/api/v1/lembretes");
             setLembretes(response.data);
         } catch (error) {
             console.error("Erro ao buscar lembretes:", error);
@@ -105,7 +105,7 @@ const Lembretes = () => {
 
     const confirmDelete = async () => {
         try {
-            await api.delete(`http://localhost:8080/api/v1/lembretes/${selectedLembreteId}`);
+            await api.delete(`/api/v1/lembretes/${selectedLembreteId}`);
             setMessage('Lembrete excluído com sucesso!'); // Mensagem de sucesso ao excluir
             fetchLembretes();
             setSelectedLembreteId(null);
@@ -130,19 +130,24 @@ const Lembretes = () => {
         <div className="reminder-page">
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal} className="modal-content" overlayClassName="modal-overlay">
                 <h2 className="centerText">{isEditing ? 'Editar Lembrete' : 'Criar Lembrete'}</h2>
-                <form onSubmit={handleSubmit} className="reminder-form">
-                    <div className="lembreteInputGroup">
-                        <label className="lembreteInputLabel">Título</label>
+                <form onSubmit={handleSubmit} className="">
+                    <div className="lembreteInputGroup horizontal">
+                        <label className="lembreteInputLabel" title="Título">
+                            <FontAwesomeIcon icon={faHeading} />
+                        </label>
                         <input
                             type="text"
                             className="lembreteInputField"
+                            placeholder="Título do lembrete"
                             required
                             value={titulo_lembrete}
                             onChange={(e) => setTitulo(e.target.value)}
                         />
                     </div>
-                    <div className="lembreteInputGroup">
-                        <label className="lembreteInputLabel">Data</label>
+                    <div className="lembreteInputGroup horizontal">
+                        <label className="lembreteInputLabel" title="Data">
+                            <FontAwesomeIcon icon={faCalendar} />
+                        </label>
                         <input
                             type="date"
                             className="lembreteInputField"
@@ -151,8 +156,10 @@ const Lembretes = () => {
                             onChange={(e) => setData(e.target.value)}
                         />
                     </div>
-                    <div className="lembreteInputGroup">
-                        <label className="lembreteInputLabel">Hora</label>
+                    <div className="lembreteInputGroup horizontal">
+                        <label className="lembreteInputLabel" title="Hora">
+                            <FontAwesomeIcon icon={faClock} />
+                        </label>
                         <input
                             type="time"
                             className="lembreteInputField"
@@ -161,27 +168,33 @@ const Lembretes = () => {
                             onChange={(e) => setHora(e.target.value)}
                         />
                     </div>
-                    <div className="lembreteInputGroup">
-                        <label className="lembreteInputLabel">Nome do Paciente</label>
+                    <div className="lembreteInputGroup horizontal">
+                        <label className="lembreteInputLabel" title="Nome do Paciente">
+                            <FontAwesomeIcon icon={faUser} />
+                        </label>
                         <input
                             type="text"
                             className="lembreteInputField"
+                            placeholder="Nome do paciente"
                             required
                             value={nome_paciente}
                             onChange={(e) => setNome(e.target.value)}
                         />
                     </div>
-                    <div className="lembreteInputGroup">
-                        <label className="lembreteInputLabel">Local</label>
+                    <div className="lembreteInputGroup horizontal">
+                        <label className="lembreteInputLabel" title="Local">
+                            <FontAwesomeIcon icon={faMapMarkerAlt} />
+                        </label>
                         <input
                             type="text"
                             className="lembreteInputField"
+                            placeholder="Local do lembrete"
                             required
                             value={local_lembrete}
                             onChange={(e) => setLocal(e.target.value)}
                         />
                     </div>
-                    <div className="inputGroup row centerButton">
+                    <div className="row centerButton">
                         <button type="submit" className="button btnInfo">{isEditing ? 'Atualizar' : 'Cadastrar'}</button>
                         <button onClick={closeModal} className="button btnError">Fechar</button>
                     </div>
